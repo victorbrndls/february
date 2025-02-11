@@ -21,6 +21,7 @@ class LoginViewModel @Inject constructor(
 		LoginViewState(
 			username = "",
 			password = "",
+			saveCredentials = false,
 			isSuccess = false,
 			errorMessage = null,
 		)
@@ -38,6 +39,10 @@ class LoginViewModel @Inject constructor(
 
 	fun onPasswordChanged(password: String) {
 		_state.update { it.copy(password = password) }
+	}
+
+	fun onToggleSaveCredentials(value: Boolean) {
+		_state.update { it.copy(saveCredentials = value) }
 	}
 
 	fun onSubmit() {

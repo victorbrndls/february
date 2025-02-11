@@ -4,12 +4,15 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -46,6 +49,7 @@ fun LoginScreen(
 		state = state,
 		onUsernameChanged = viewModel::onUsernameChanged,
 		onPasswordChanged = viewModel::onPasswordChanged,
+		onToggleSaveCredentials = viewModel::onToggleSaveCredentials,
 		onSubmit = viewModel::onSubmit,
 		innerPadding = innerPadding
 	)
@@ -56,6 +60,7 @@ fun LoginScreen(
 	state: LoginViewState,
 	onUsernameChanged: (String) -> Unit,
 	onPasswordChanged: (String) -> Unit,
+	onToggleSaveCredentials: (Boolean) -> Unit,
 	onSubmit: () -> Unit,
 	innerPadding: PaddingValues,
 ) {
@@ -68,13 +73,15 @@ fun LoginScreen(
 			horizontalAlignment = Alignment.CenterHorizontally,
 			modifier = Modifier
 				.fillMaxSize()
+				.padding(horizontal = 32.dp)
 		) {
 			Spacer(Modifier.height(64.dp))
 
 			TextField(
 				value = state.username,
 				onValueChange = onUsernameChanged,
-				label = { Text("Username") }
+				label = { Text("Username") },
+				modifier = Modifier.fillMaxWidth()
 			)
 
 			Spacer(Modifier.height(16.dp))
@@ -82,10 +89,22 @@ fun LoginScreen(
 			TextField(
 				value = state.password,
 				onValueChange = onPasswordChanged,
-				label = { Text("Password") }
+				label = { Text("Password") },
+				modifier = Modifier.fillMaxWidth()
 			)
 
-			Spacer(Modifier.height(16.dp))
+			Spacer(Modifier.height(8.dp))
+
+			Row(
+				verticalAlignment = Alignment.CenterVertically,
+				modifier = Modifier
+					.align(Alignment.End)
+			) {
+				Checkbox(state.saveCredentials, onCheckedChange = onToggleSaveCredentials)
+				Text(
+					text = "Save credentials",
+				)
+			}
 
 			Button(
 				onClick = onSubmit,
@@ -127,11 +146,13 @@ private fun Preview() {
 			state = LoginViewState(
 				username = "username",
 				password = "password",
+				saveCredentials = false,
 				isSuccess = false,
 				errorMessage = null,
 			),
 			onUsernameChanged = {},
 			onPasswordChanged = {},
+			onToggleSaveCredentials = {},
 			onSubmit = {},
 			innerPadding = PaddingValues(top = 48.dp, bottom = 32.dp)
 		)
@@ -146,12 +167,14 @@ private fun Preview_Loading() {
 			state = LoginViewState(
 				username = "username",
 				password = "password",
+				saveCredentials = false,
 				isSuccess = false,
 				errorMessage = null,
 				isLoading = true,
 			),
 			onUsernameChanged = {},
 			onPasswordChanged = {},
+			onToggleSaveCredentials = {},
 			onSubmit = {},
 			innerPadding = PaddingValues(top = 48.dp, bottom = 32.dp)
 		)
@@ -166,11 +189,13 @@ private fun Preview_Success() {
 			state = LoginViewState(
 				username = "username",
 				password = "password",
+				saveCredentials = false,
 				isSuccess = true,
 				errorMessage = null,
 			),
 			onUsernameChanged = {},
 			onPasswordChanged = {},
+			onToggleSaveCredentials = {},
 			onSubmit = {},
 			innerPadding = PaddingValues(top = 48.dp, bottom = 32.dp)
 		)
@@ -185,11 +210,13 @@ private fun Preview_Error() {
 			state = LoginViewState(
 				username = "username",
 				password = "password",
+				saveCredentials = false,
 				isSuccess = false,
 				errorMessage = "Something went wrong",
 			),
 			onUsernameChanged = {},
 			onPasswordChanged = {},
+			onToggleSaveCredentials = {},
 			onSubmit = {},
 			innerPadding = PaddingValues(top = 48.dp, bottom = 32.dp)
 		)
