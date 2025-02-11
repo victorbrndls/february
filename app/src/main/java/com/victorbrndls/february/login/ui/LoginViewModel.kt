@@ -2,8 +2,8 @@ package com.victorbrndls.february.login.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.victorbrndls.february.domain.LoginUseCase
-import com.victorbrndls.february.domain.LoginUseCaseResult
+import com.victorbrndls.february.login.domain.LoginUseCase
+import com.victorbrndls.february.login.domain.LoginUseCaseResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted

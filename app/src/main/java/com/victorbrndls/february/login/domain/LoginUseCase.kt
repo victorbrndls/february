@@ -1,4 +1,4 @@
-package com.victorbrndls.february.domain
+package com.victorbrndls.february.login.domain
 
 import kotlinx.coroutines.delay
 import javax.inject.Inject
