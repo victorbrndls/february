@@ -10,7 +10,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
-
 @Singleton
 class LoginCredentialsRepository @Inject constructor(
 	@ApplicationContext context: Context,

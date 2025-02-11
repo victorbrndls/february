@@ -79,12 +79,8 @@ class LoginViewModel @Inject constructor(
 			)
 
 			when (result) {
-				is LoginUseCaseResult.Success -> {
-					onLoginSuccess()
-				}
-				is LoginUseCaseResult.Failure -> {
-					onLoginFailure(result)
-				}
+				is LoginUseCaseResult.Success -> onLoginSuccess()
+				is LoginUseCaseResult.Failure -> onLoginFailure(result)
 			}
 		}
 	}
